@@ -2,10 +2,17 @@
   "name": "jktvr18passmanager",
   "version": "1.0.0",
   "description": "",
-  "main": "js/app.js",
+  "main": "web/js/App.js",
   "scripts": {
+    "dev": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "nadia",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^4.2.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
 }
