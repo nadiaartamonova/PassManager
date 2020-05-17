@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _AuthModule_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AuthModule.js */ \"./web/js/AuthModule.js\");\n/* harmony import */ var _HttpModule_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HttpModule.js */ \"./web/js/HttpModule.js\");\n\n\nalert('hello from App');\n_AuthModule_js__WEBPACK_IMPORTED_MODULE_0__[\"authModule\"].test();\n_AuthModule_js__WEBPACK_IMPORTED_MODULE_0__[\"authModule\"].test2();\n_HttpModule_js__WEBPACK_IMPORTED_MODULE_1__[\"httpModule\"].test2();\n\n//# sourceURL=webpack:///./web/js/App.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _AuthModule_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AuthModule.js */ \"./web/js/AuthModule.js\");\n/* harmony import */ var _HttpModule_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HttpModule.js */ \"./web/js/HttpModule.js\");\n\n\n\n\ndocument.getElementById(\"showLogin\").onclick = function(){\n  toogleMenuActive(\"showLogin\");\n  _AuthModule_js__WEBPACK_IMPORTED_MODULE_0__[\"authModule\"].printLoginForm();\n};\n\nfunction toogleMenuActive(elementId){\n  let activeElement = document.getElementById(elementId);\n  let passiveElements = document.getElementsByClassName(\"nav-item\");\n  for(let i = 0; i < passiveElements.length; i++){\n    if(activeElement === passiveElements[i]){\n      passiveElements[i].classList.add(\"active\");\n    }else{\n      if(passiveElements[i].classList.contains(\"active\")){\n        passiveElements[i].classList.remove(\"active\");\n      }\n    }\n  }\n}\n\n//# sourceURL=webpack:///./web/js/App.js?");
 
 /***/ }),
 
@@ -103,10 +103,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Aut
   !*** ./web/js/AuthModule.js ***!
   \******************************/
 /*! exports provided: authModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"authModule\", function() { return authModule; });\nclass AuthModule{\n    test(){\n        alert('Hello from AuthModule');\n    }\n    test2(){\n        alert('Hello from AuthModule222');\n    }\n    test3(){\n        alert('Hello from AuthModule3333');\n    }\n    test4(){\n        alert('Hello from AuthModule4444');\n    }\n}\nlet authModule= new AuthModule();\n\n\n\n//# sourceURL=webpack:///./web/js/AuthModule.js?");
+eval("throw new Error(\"Module parse failed: Unexpected token (28:18)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n|             }\\n|             \\n>             auth(){\\n|                 let login = document.getElementById('login').value;\\n|                 let password = document.getElementById('password').value;\");\n\n//# sourceURL=webpack:///./web/js/AuthModule.js?");
 
 /***/ }),
 
@@ -118,7 +117,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"httpModule\", function() { return httpModule; });\nclass HttpModule{\n    test2(){\n        alert('Hello from HttpModule');\n    }\n}\nlet httpModule = new HttpModule();\n\n\n//# sourceURL=webpack:///./web/js/HttpModule.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"httpModule\", function() { return httpModule; });\nclass HttpModule{\n    \n    status(response) {  \n        if (response.status >= 200 && response.status < 300) {  \n            return Promise.resolve(response)  \n        } else {  \n            return Promise.reject(new Error(response.statusText))  \n        }  \n  }\n    json(response) {  \n        return response.json()  \n    }\n    \n    parseOptions(opt){\n      if(opt.method === 'POST'){\n      return {\n              method: opt.method,\n              headers: {\n                'Content-Type': 'application/json;charset=utf-8'\n              },\n              credentials: 'include',\n              body: JSON.stringify(opt.data)\n            };\n    }else{\n      return {\n              method: opt.method,\n              headers: {\n                'Content-Type': 'application/json;charset=utf-8'\n              },\n              credentials: 'include'\n            };\n    } \n}\n    \n    //POST запрос формат: httpModule.http({url:'createUser',options:{method:'POST',data:user}})\n    //GET запрос формае: httpModule.http({url:'listUsers',options:{method:'GET'}})\n    \n    http(httpOptions){\n        let options = httpModule.parseOptions(httpOptions.options);\n         return fetch(httpOptions.url, options)\n              .then(httpModule.status)\n              .then(httpModule.json)\n              .catch((ex) => console.log(\"Fetch Exception\", ex));\n    }\n}\nlet httpModule = new HttpModule();\n\n\n//# sourceURL=webpack:///./web/js/HttpModule.js?");
 
 /***/ })
 
